@@ -1,0 +1,38 @@
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Quanto ti piace la matematica da 1  a 10? </span>
+  </div>
+  <input class="form-control" placeholder="Inserisci la tua risposta" name= "matematica" #matematica>
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Quanto ti piace l'arte da 1  a 10? </span>
+  </div>
+  <input class="form-control" placeholder="Inserisci la tua risposta" name= "arte" #arte>
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Quanto ti piace l'informatica da 1  a 10? </span>
+  </div>
+  <input class="form-control" placeholder="Inserisci la tua risposta" name= "informatica" #informatica>
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Quanto ti piacciono le lingue da 1  a 10? </span>
+  </div>
+  <input class="form-control" placeholder="Inserisci la tua risposta" name= "lingue" #lingue>
+</div>
+
+<button (click)="addArticle(matematica, arte, informatica, lingue)" class="btn btn-primary">
+  Submit link
+</button>
+
+
+
+{{risposte | json}}
+  
+
+
