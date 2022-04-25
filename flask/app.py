@@ -1,7 +1,16 @@
 from flask import Flask
+from flask_restful import Resource , Api 
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
+api = Api(app)
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+class Hi(Resource):
+    def get(self):
+        return "hello MongoTango"
+
+api.add_resource(Hi, '/')
+
+if __name__ == '__main__':
+    app.run()
