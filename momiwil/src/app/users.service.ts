@@ -8,7 +8,7 @@ export class UsersService {
 
   constructor(private http :HttpClient) { }
   getData(){
-    let url = "https://5000-krieg2065-flaskangularp-i4ci8jl0rwk.ws-eu42.gitpod.io/";
+    let url = "https://5000-krieg2065-flaskangularp-bta2pn3u09m.ws-eu42.gitpod.io/";
     return this.http.get(url);
   }
 }
