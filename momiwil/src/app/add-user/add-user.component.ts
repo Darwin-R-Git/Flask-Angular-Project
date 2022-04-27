@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Users } from '../users.model';
+import { UsersService } from '../users.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-user',
@@ -11,7 +14,8 @@ export class AddUserComponent implements OnInit {
   angForm: FormGroup;
   constructor(
     private fb : FormBuilder,
-    private route: Router
+    private route: Router,
+    private usersService: UsersService
   ) { 
     this.angForm = this.fb.group({
       name : ["", Validators.required],
@@ -28,7 +32,11 @@ export class AddUserComponent implements OnInit {
 
 
   postdata(forms : any){
-    console.log(this.angForm.value)
+    this.usersService.addUser(
+      this.angForm.value.name,
+      this.angForm.value.informatica,
+      this.angForm.value.matematica,
+      this.angForm.value.arte).pipe(first()).subscribe(data => { this.route.navigate(['list-users'])});
 
   }
 }
