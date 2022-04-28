@@ -1,5 +1,5 @@
 export class Users{
-    name?: string;
+    user?: string;
     informatica ?: number;
     matematica ?: number;
     arte ?: number;

@@ -9,14 +9,14 @@ import { map } from 'rxjs/operators';
 })
 export class UsersService {
 
-  baseUrl : string = "https://5000-krieg2065-flaskangularp-ck29v40hjj1.ws-eu43.gitpod.io/"
+  baseUrl : string = "https://5000-krieg2065-flaskangularp-27tm9bph13n.ws-eu43.gitpod.io/"
 
   constructor(private http :HttpClient) { }
   getData(){
-    let url = "https://5000-krieg2065-flaskangularp-ck29v40hjj1.ws-eu43.gitpod.io/";
-    return this.http.get(url +"users2");
+    let url = "https://5000-krieg2065-flaskangularp-27tm9bph13n.ws-eu43.gitpod.io/";
+    return this.http.get(url +"users");
   }
-  public addUser(name: any,informatica: any,matematica: any,arte: any){
-    return this.http.put<any>(this.baseUrl +"users1",{name,informatica,matematica,arte}).pipe(map((Users: any) => {return Users}))
+  public addUser(user: any,informatica: any,matematica: any,arte: any){
+    return this.http.post<any>(this.baseUrl +"users",{user,informatica,matematica,arte}).pipe(map((Users: any) => {return Users}))
   }
 }

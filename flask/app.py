@@ -1,62 +1,52 @@
-from flask import Flask
+from flask import Flask , request, jsonify, Response
 from flask_restful import Resource , Api ,reqparse
 from flask_cors import CORS
 from flask_pymongo import PyMongo
+from bson import json_util
 
 app = Flask(__name__)
-mongodb_client = PyMongo(app, uri="mongodb://WilsonRiccardo:Ricky2004!@cluster0-shard-00-00.mwou4.mongodb.net:27017,cluster0-shard-00-01.mwou4.mongodb.net:27017,cluster0-shard-00-02.mwou4.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-kkdpdd-shard-0&authSource=admin&retryWrites=true&w=majority"
-)
-db = mongodb_client.Prova1
+app.config["MONGO_URI"] = "mongodb://WilsonRiccardo:Ricky2004!@cluster0-shard-00-00.mwou4.mongodb.net:27017,cluster0-shard-00-01.mwou4.mongodb.net:27017,cluster0-shard-00-02.mwou4.mongodb.net:27017/Prova1?ssl=true&replicaSet=atlas-kkdpdd-shard-0&authSource=admin&retryWrites=true&w=majority"
+
+mongo = PyMongo(app)
+
+app = Flask(__name__)
 CORS(app)
 api = Api(app)
 
 
-
-#parser = reqparse.RequestParser()
-#parser.add_argument('name')
-#parser.add_argument('informatica ', type=int)
-#parser.add_argument('matematica ', type=int)
-#parser.add_argument('arte', type=int)
-
-#users = {}
-
-@app.route("/add_one")
-def add_one():
-    db.Prova1.insert_one({'title': "todo title", 'body': "todo body"})
-    return flask.jsonify(message="success")
-
-@app.route("/userFind/<username>")
-def user_profile(user):
-    user = mongo.Prova1.Prova1.find_one_or_404({"user":user})
-    return jsonify(user)
-    
-@app.route("/uploads/<path:filename>", methods=["POST"])
-def save_upload(filename):
-    mongo.save_file(filename, request.files["file"])
-    return 
-
-
-
-
-
 #-------------------------------------------------------------------------------------------------------------------Prova
 
-
-
-
-class Hi(Resource):
+class UsersApi(Resource):
     def get(self):
-        return "hello ciao" 
-    def post(self,user_id):
-        args = parser.parse_args()
-        new_user = {'name' : args['name'],
-        'informatica' : args['informatica'],
-        'matematica' : args['matematica'],
-        'arte' : args['arte'],
-        }
-        users[user_id] = new_user
-        return {user_id : users[user_id]}, 201
-api.add_resource(Hi, '/users2')
+        uss = mongo.db.Prova1.find()
+        resp = json_util.dumps(uss)
+        return Response(resp, mimetype = 'application/json') 
+    def post(self):
+        user = request.json["user"]
+        informatica = request.json["informatica"]
+        matematica = request.json["matematica"]
+        arte = request.json["arte"]
+        if user and informatica and matematica and arte:
+            id = mongo.db.Prova1.insert_one(
+                {
+                'user': user,
+                'informatica': informatica,
+                'matematica': matematica,
+                'arte': arte 
+                }
+            )
+            resp = {
+                "id" : str(id),
+                'user': user,
+                'informatica': informatica,
+                'matematica': matematica,
+                'arte': arte 
+            }
+            return resp
+        else:
+            return {'message': 'received'}
+
+api.add_resource(UsersApi, '/users')
 
 if __name__ == '__main__':
     app.run()

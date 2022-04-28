@@ -18,7 +18,7 @@ export class AddUserComponent implements OnInit {
     private usersService: UsersService
   ) { 
     this.angForm = this.fb.group({
-      name : ["", Validators.required],
+      user : ["", Validators.required],
       informatica: ["", Validators.required],
       matematica: ["", Validators.required],
       arte: ["", Validators.required],
@@ -33,10 +33,12 @@ export class AddUserComponent implements OnInit {
 
   postdata(forms : any){
     this.usersService.addUser(
-      this.angForm.value.name,
+      this.angForm.value.user,
       this.angForm.value.informatica,
       this.angForm.value.matematica,
-      this.angForm.value.arte).pipe(first()).subscribe(data => { this.route.navigate(['list-users'])});
+      this.angForm.value.arte).pipe(first()).subscribe((data: any) => {
+        console.warn(data)
+      });
 
   }
 }
