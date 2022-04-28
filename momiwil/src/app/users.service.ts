@@ -9,11 +9,11 @@ import { map } from 'rxjs/operators';
 })
 export class UsersService {
 
-  baseUrl : string = "https://5000-krieg2065-flaskangularp-efhw8vkmlfa.ws-eu43.gitpod.io/"
+  baseUrl : string = "https://5000-krieg2065-flaskangularp-ck29v40hjj1.ws-eu43.gitpod.io/"
 
   constructor(private http :HttpClient) { }
   getData(){
-    let url = "https://5000-krieg2065-flaskangularp-efhw8vkmlfa.ws-eu43.gitpod.io/";
+    let url = "https://5000-krieg2065-flaskangularp-ck29v40hjj1.ws-eu43.gitpod.io/";
     return this.http.get(url +"users2");
   }
   public addUser(name: any,informatica: any,matematica: any,arte: any){
