@@ -17,6 +17,6 @@ export class UsersService {
     return this.http.get(url +"users");
   }
   public addUser(user: any,informatica: any,matematica: any,arte: any){
-    return this.http.post<any>(this.baseUrl +"users",{user,informatica,matematica,arte}).pipe(map((Users: any) => {return Users}))
+    return this.http.post<any>(this.baseUrl +"usersRec",{user,informatica,matematica,arte}).pipe(map((Users: any) => {return Users}))
   }
 }
