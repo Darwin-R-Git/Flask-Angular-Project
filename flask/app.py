@@ -1,15 +1,17 @@
 from flask import Flask , request, jsonify, Response
 from flask_restful import Resource , Api ,reqparse
 from flask_cors import CORS
-from flask_pymongo import PyMongo
 from bson import json_util
 import pandas as pd
+
+from flask_pymongo import PyMongo
+
+app = Flask(__name__)
 
 app.config["MONGO_URI"] = "mongodb://WilsonRiccardo:Ricky2004!@cluster0-shard-00-00.mwou4.mongodb.net:27017,cluster0-shard-00-01.mwou4.mongodb.net:27017,cluster0-shard-00-02.mwou4.mongodb.net:27017/Prova1?ssl=true&replicaSet=atlas-kkdpdd-shard-0&authSource=admin&retryWrites=true&w=majority"
 
 mongo = PyMongo(app)
 
-app = Flask(__name__)
 CORS(app)
 api = Api(app)
 
