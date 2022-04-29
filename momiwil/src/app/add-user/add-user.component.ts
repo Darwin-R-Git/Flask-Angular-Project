@@ -11,6 +11,7 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit {
+  newData: Object | undefined;
   angForm: FormGroup;
   constructor(
     private fb : FormBuilder,
@@ -21,9 +22,7 @@ export class AddUserComponent implements OnInit {
       user : ["", Validators.required],
       informatica: ["", Validators.required],
       matematica: ["", Validators.required],
-      arte: ["", Validators.required],
-
-      
+      arte: ["", Validators.required]
     })
   }
 
@@ -37,6 +36,7 @@ export class AddUserComponent implements OnInit {
       this.angForm.value.informatica,
       this.angForm.value.matematica,
       this.angForm.value.arte).pipe(first()).subscribe((data: any) => {
+        this.newData = data;
         console.warn(data)
       });
 
